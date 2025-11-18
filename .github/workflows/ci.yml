@@ -39,3 +39,10 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          # NOTE: https://sonarcloud.io/project/information?id=hexlet-boilerplates_php-package
+          args: >
+            -Dsonar.projectKey=irudenok_php-project-48
+            -Dsonar.organization=irudenok
+            -Dsonar.sources=src/
+            -Dsonar.php.coverage.reportPaths=build/logs/clover.xml
