@@ -18,8 +18,17 @@ class DifferTest extends TestCase
 {
     public function testGenDiff(): void
     {
-        $file1 = __DIR__ . '/fixtures/file1.json';
-        $file2 = __DIR__ . '/fixtures/file2.json';
+        $file1 = 'file1.json';
+        $file2 = 'file2.json';
+
+        $result = file_get_contents(__DIR__ . '/fixtures/test_result');
+        $this->assertEquals($result, genDiff($file1, $file2));
+    }
+
+    public function testYaml(): void
+    {
+        $file1 = 'file1.yml';
+        $file2 = 'file2.yml';
 
         $result = file_get_contents(__DIR__ . '/fixtures/test_result');
         $this->assertEquals($result, genDiff($file1, $file2));

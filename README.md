@@ -12,3 +12,6 @@
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=irudenok_php-project-48&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=irudenok_php-project-48)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=irudenok_php-project-48&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=irudenok_php-project-48)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=irudenok_php-project-48&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=irudenok_php-project-48)
+
+## Пример использования.
+[![asciicast](https://asciinema.org/a/IHFfLSRr0oCWaBObHgW64EF0K.svg)](https://asciinema.org/a/IHFfLSRr0oCWaBObHgW64EF0K)

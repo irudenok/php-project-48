@@ -4,6 +4,8 @@ namespace Differ\Differ;
 
 use Funct\Collection;
 
+use function Differ\Parser\parseFile;
+
 function genDiff(string $pathToFile1, string $pathToFile2): string
 {
     $data1 = parseFile($pathToFile1);
@@ -20,22 +22,6 @@ function genDiff(string $pathToFile1, string $pathToFile2): string
     }
 
     return "{\n" . implode("\n", $lines) . "\n}";
-}
-
-function parseFile(string $filePath): array
-{
-    if (!file_exists($filePath)) {
-        throw new \Exception("File not found: {$filePath}");
-    }
-
-    $content = file_get_contents($filePath);
-    $data = json_decode($content, true);
-
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        throw new \Exception("Invalid JSON in file: {$filePath}");
-    }
-
-    return $data;
 }
 
 function buildDiffLine(string $key, array $data1, array $data2): string
