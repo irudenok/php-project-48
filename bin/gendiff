@@ -3,6 +3,7 @@
 <?php
 
 use Docopt as dc;
+use function Differ\Differ\genDiff;
 
 $autoloadPath1 = __DIR__ . '/../../../autoload.php';
 $autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
@@ -17,14 +18,26 @@ $doc = <<<DOC
 Generate diff
 
 Usage:
+  gendiff <file1> <file2>
   gendiff (-h|--help)
   gendiff (-v|--version)
+  gendiff [--format <fmt>] <firstFile> <secondFile>
 
 Options:
   -h --help                     Show this screen
   -v --version                  Show version
+  --format <fmt>                Report format [default: stylish]
 DOC;
 
 $args = Docopt::handle($doc, array('version' => '1.0.0'));
 
+// TODO: add absoslute path
+$file1 = getcwd() . DIRECTORY_SEPARATOR . $args['<file1>'];
+$file2 = getcwd() . DIRECTORY_SEPARATOR . $args['<file2>'];
 
+// echo $file1 . " " . $file2;
+
+// print_r(json_decode(file_get_contents($file1)));
+// print_r(json_decode(file_get_contents($file2)));
+
+echo genDiff($file1, $file2);
