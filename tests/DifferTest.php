@@ -33,4 +33,22 @@ class DifferTest extends TestCase
         $result = file_get_contents(__DIR__ . '/fixtures/test_result');
         $this->assertEquals($result, genDiff($file1, $file2));
     }
+
+    public function testNestedJson(): void
+    {
+        $file1 = 'nested1.json';
+        $file2 = 'nested2.json';
+
+        $result = file_get_contents(__DIR__ . '/fixtures/test_result_nested');
+        $this->assertEquals($result, genDiff($file1, $file2));
+    }
+
+    public function testNestedYaml(): void
+    {
+        $file1 = 'nested1.yml';
+        $file2 = 'nested2.yml';
+
+        $result = file_get_contents(__DIR__ . '/fixtures/test_result_nested');
+        $this->assertEquals($result, genDiff($file1, $file2));
+    }
 }
