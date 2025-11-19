@@ -13,6 +13,29 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=irudenok_php-project-48&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=irudenok_php-project-48)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=irudenok_php-project-48&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=irudenok_php-project-48)
 
+## Prerequisites
+
+* Linux, Macos, WSL
+* PHP >= 8.2
+* Make
+* Git
+
+## Setup
+
+```bash
+git clone git@github.com:irudenok/php-project-48.git
+
+make install
+```
+
+## Run gendiff
+
+```bash
+php bin/gendiff --format json .\tests\fixtures\json1.json .\tests\fixtures\json2.json
+php bin/gendiff .\tests\fixtures\file1.json .\tests\fixtures\file2.json
+php bin/gendiff --format stylish .\tests\fixtures\nested1.yml .\tests\fixtures\nested2.yml
+```
+
 ## Пример использования.
 [![asciicast](https://asciinema.org/a/IHFfLSRr0oCWaBObHgW64EF0K.svg)](https://asciinema.org/a/IHFfLSRr0oCWaBObHgW64EF0K)
 
@@ -21,3 +44,6 @@
 
 ## Пример использования с plain форматом.
 [![asciicast](https://asciinema.org/a/3cyAmPdDqaf2mFc6yKGlbl7dC.svg)](https://asciinema.org/a/3cyAmPdDqaf2mFc6yKGlbl7dC)
+
+## Пример использования с json форматом.
+[![asciicast](https://asciinema.org/a/RJQLHfNz5tCLFvg45bN1Kgagw.svg)](https://asciinema.org/a/RJQLHfNz5tCLFvg45bN1Kgagw)
