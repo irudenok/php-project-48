@@ -80,4 +80,3 @@ function formatComplexValue(array $value, int $depth): string
 
     return "{\n" . implode("\n", $lines) . "\n{$outerIndent}}";
 }
-
