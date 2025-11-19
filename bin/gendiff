@@ -28,7 +28,7 @@ Options:
   --format <fmt>                Report format [default: stylish]
 DOC;
 
-$args = Docopt::handle($doc, array('version' => '1.0.0'));
+$args = DocoptLib::handle($doc, array('version' => '1.0.0'));
 
 $file1 = $args['<firstFile>'];
 $file2 = $args['<secondFile>'];

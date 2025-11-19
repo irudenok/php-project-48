@@ -18,3 +18,6 @@
 
 ## Пример использования со вложенными структурами.
 [![asciicast](https://asciinema.org/a/xl2zNcUlmKlk7cSoJXQKjvdvr.svg)](https://asciinema.org/a/xl2zNcUlmKlk7cSoJXQKjvdvr)
+
+## Пример использования с plain форматом.
+[![asciicast](https://asciinema.org/a/3cyAmPdDqaf2mFc6yKGlbl7dC.svg)](https://asciinema.org/a/3cyAmPdDqaf2mFc6yKGlbl7dC)

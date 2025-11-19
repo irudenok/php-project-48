@@ -25,8 +25,9 @@
         "files": [
             "src/Differ/Differ.php",
             "src/Differ/Parser.php",
-            "src/Formatters/Format.php",
-            "src/Formatters/Stylish.php"
+            "src/Formatters.php",
+            "src/Formatters/Stylish.php",
+            "src/Formatters/Plain.php"
         ],
         "psr-4": {
             "Differ\\": "src/"
