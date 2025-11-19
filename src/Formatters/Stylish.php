@@ -46,7 +46,7 @@ function buildStylish(array $nodes, int $depth): string
     return "{\n" . implode("\n", $lines) . "\n{$outerIndent}}";
 }
 
-function formatValue($value, int $depth): string
+function formatValue(mixed $value, int $depth): string
 {
     if (is_bool($value)) {
         return $value ? 'true' : 'false';

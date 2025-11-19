@@ -40,7 +40,7 @@ function buildPlain(array $nodes, string $path = ''): array
     return $lines;
 }
 
-function stringifyValue($value): string
+function stringifyValue(mixed $value): string
 {
     if (is_array($value)) {
         return '[complex value]';
