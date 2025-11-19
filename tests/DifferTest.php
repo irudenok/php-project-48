@@ -51,4 +51,13 @@ class DifferTest extends TestCase
         $result = file_get_contents(__DIR__ . '/fixtures/test_result_nested');
         $this->assertEquals($result, genDiff($file1, $file2));
     }
+
+    public function testExplicitStylishFormat(): void
+    {
+        $file1 = 'nested1.json';
+        $file2 = 'nested2.json';
+
+        $result = file_get_contents(__DIR__ . '/fixtures/test_result_nested');
+        $this->assertEquals($result, genDiff($file1, $file2, 'stylish'));
+    }
 }

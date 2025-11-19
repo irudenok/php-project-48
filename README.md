@@ -15,3 +15,6 @@
 
 ## Пример использования.
 [![asciicast](https://asciinema.org/a/IHFfLSRr0oCWaBObHgW64EF0K.svg)](https://asciinema.org/a/IHFfLSRr0oCWaBObHgW64EF0K)
+
+## Пример использования со вложенными структурами.
+[![asciicast](https://asciinema.org/a/xl2zNcUlmKlk7cSoJXQKjvdvr.svg)](https://asciinema.org/a/xl2zNcUlmKlk7cSoJXQKjvdvr)

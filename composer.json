@@ -24,7 +24,9 @@
     "autoload": {
         "files": [
             "src/Differ/Differ.php",
-            "src/Differ/Parser.php"
+            "src/Differ/Parser.php",
+            "src/Formatters/Format.php",
+            "src/Formatters/Stylish.php"
         ],
         "psr-4": {
             "Differ\\": "src/"
