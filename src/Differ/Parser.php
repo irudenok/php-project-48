@@ -4,22 +4,11 @@ namespace Differ\Parser;
 
 use Symfony\Component\Yaml\Yaml;
 
-function parseFile(string $pathToFile): array
+function parse(array $data): array
 {
-    if (!file_exists($pathToFile)) {
-        $path = __DIR__ . "/../../tests/fixtures/{$pathToFile}";
-    } else {
-        $path = $pathToFile;
-    }
-
-    $pathInfo = pathinfo($path);
-    $extension = $pathInfo['extension'] ?? '';
-
-    $parsedFile = match ($extension) {
-        'json' => json_decode((string) file_get_contents($path), true),
-        'yaml', 'yml' => Yaml::parse((string) file_get_contents($path)),
+    return match ($data['extension']) {
+        'json' => json_decode($data['content'], true),
+        'yaml', 'yml' => Yaml::parse($data['content']),
         default => 'Incorrect way!',
     };
-
-    return $parsedFile;
 }

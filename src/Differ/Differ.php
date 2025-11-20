@@ -2,25 +2,28 @@
 
 namespace Differ\Differ;
 
-use Funct\Collection;
-
-use function Differ\Parser\parseFile;
-use function Differ\Formatters\format as formatDiff;
+use function Funct\Collection\sortBy;
+use function Differ\Reader\readFile;
+use function Differ\Parser\parse;
+use function Differ\Formatters\render;
 
 function genDiff(string $pathToFile1, string $pathToFile2, string $format = 'stylish'): string
 {
-    $data1 = parseFile($pathToFile1);
-    $data2 = parseFile($pathToFile2);
+    $file1 = readFile($pathToFile1);
+    $file2 = readFile($pathToFile2);
+
+    $data1 = parse($file1);
+    $data2 = parse($file2);
 
     $diff = buildDiffTree($data1, $data2);
 
-    return formatDiff($diff, $format);
+    return render($diff, $format);
 }
 
 function buildDiffTree(array $data1, array $data2): array
 {
     $keys = array_unique(array_merge(array_keys($data1), array_keys($data2)));
-    $sortedKeys = Collection\sortBy($keys, fn ($key) => $key);
+    $sortedKeys = sortBy($keys, fn ($key) => $key);
 
     $diff = [];
 
