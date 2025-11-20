@@ -4,11 +4,11 @@ namespace Differ\Parser;
 
 use Symfony\Component\Yaml\Yaml;
 
-function parse(array $data): array
+function parse(string $content, string $extension): array
 {
-    return match ($data['extension']) {
-        'json' => json_decode($data['content'], true),
-        'yaml', 'yml' => Yaml::parse($data['content']),
+    return match ($extension) {
+        'json' => json_decode($content, true),
+        'yaml', 'yml' => Yaml::parse($content),
         default => 'Incorrect way!',
     };
 }

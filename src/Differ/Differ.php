@@ -9,11 +9,11 @@ use function Differ\Formatters\render;
 
 function genDiff(string $pathToFile1, string $pathToFile2, string $format = 'stylish'): string
 {
-    $file1 = readFile($pathToFile1);
-    $file2 = readFile($pathToFile2);
+    [$firstFileContent, $firstFileExtension] = readFile($pathToFile1);
+    [$secondFileContent, $secondFileExtension] = readFile($pathToFile2);
 
-    $data1 = parse($file1);
-    $data2 = parse($file2);
+    $data1 = parse($firstFileContent, $firstFileExtension);
+    $data2 = parse($secondFileContent, $secondFileExtension);
 
     $diff = buildDiffTree($data1, $data2);
 
@@ -22,12 +22,14 @@ function genDiff(string $pathToFile1, string $pathToFile2, string $format = 'sty
 
 function buildDiffTree(array $data1, array $data2): array
 {
-    $keys = array_unique(array_merge(array_keys($data1), array_keys($data2)));
+    $data1Keys = array_keys($data1);
+    $data2Keys = array_keys($data2);
+
+    $mergedKeys = array_merge($data1Keys, $data2Keys);
+    $keys = array_unique($mergedKeys);
     $sortedKeys = sortBy($keys, fn ($key) => $key);
 
-    $diff = [];
-
-    foreach ($sortedKeys as $key) {
+    $result = array_map(function ($key) use ($data1, $data2) {
         $value1 = $data1[$key] ?? null;
         $value2 = $data2[$key] ?? null;
 
@@ -36,47 +38,43 @@ function buildDiffTree(array $data1, array $data2): array
 
         if ($hasInFirst && $hasInSecond) {
             if (is_array($value1) && is_array($value2)) {
-                $diff[] = [
+                return [
                     'key' => $key,
                     'type' => 'nested',
                     'children' => buildDiffTree($value1, $value2),
                 ];
-                continue;
             }
 
             if ($value1 === $value2) {
-                $diff[] = [
+                return [
                     'key' => $key,
                     'type' => 'unchanged',
                     'value' => $value1,
                 ];
-                continue;
             }
 
-            $diff[] = [
+            return [
                 'key' => $key,
                 'type' => 'updated',
                 'oldValue' => $value1,
                 'newValue' => $value2,
             ];
-            continue;
         }
 
         if ($hasInFirst) {
-            $diff[] = [
+            return [
                 'key' => $key,
                 'type' => 'removed',
                 'value' => $value1,
             ];
-            continue;
         }
 
-        $diff[] = [
+        return [
             'key' => $key,
             'type' => 'added',
             'value' => $value2,
         ];
-    }
+    }, $sortedKeys);
 
-    return $diff;
+    return array_values($result);
 }

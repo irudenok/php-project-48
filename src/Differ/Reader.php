@@ -13,5 +13,7 @@ function readFile(string $pathToFile): array
     $pathInfo = pathinfo($path);
     $extension = $pathInfo['extension'] ?? '';
 
-    return ['content' => (string) file_get_contents($path), 'extension' => $extension];
+    $fileContent = (string) file_get_contents($path);
+
+    return [$fileContent, $extension];
 }
