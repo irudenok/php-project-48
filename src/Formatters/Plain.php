@@ -12,7 +12,7 @@ function buildPlain(array $nodes, string $path = ''): array
 {
     $lines = [];
 
-    $lines = array_map(function ($node) use ($path, $lines) {
+    $lines = array_map(function ($node) use ($path) {
         $key = $node['key'];
         $property = $path === '' ? $key : "{$path}.{$key}";
 
