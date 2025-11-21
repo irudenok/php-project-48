@@ -26,7 +26,7 @@ function buildPlain(array $nodes, string $path = ''): array
                 "Property '{$property}' was updated. From {$nodeOldValue} to {$nodeNewValue}"
             ],
             'unchanged' => [],
-            default => throw new InvalidArgumentException("Unknown node type: {$node['type']}")
+            default => throw new \InvalidArgumentException("Unknown node type: {$node['type']}")
         };
     }, $nodes);
 

@@ -38,7 +38,7 @@ function buildStylish(array $nodes, int $depth): string
                 "{$indent}- {$key}: {$formattedOldValue}",
                 "{$indent}+ {$key}: {$formattedNewValue}"
             ],
-            default => throw new InvalidArgumentException("Unknown node type: {$type}")
+            default => throw new \InvalidArgumentException("Unknown node type: {$type}")
         };
     }, $nodes);
 
