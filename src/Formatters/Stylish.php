@@ -12,34 +12,42 @@ function buildStylish(array $nodes, int $depth): string
     $indent = str_repeat('  ', $depth);
     $outerIndent = str_repeat('  ', $depth - 1);
 
-    $lines = array_map(function ($node) use ($indent, $depth) {
+    $lines = array_map(function (array $node) use ($indent, $depth): array {
         $key = $node['key'];
         $type = $node['type'];
 
+        $formattedValue = formatValue($node['value'] ?? null, $depth + 1);
+        $formattedOldValue = formatValue($node['oldValue'] ?? null, $depth + 1);
+        $formattedNewValue = formatValue($node['newValue'] ?? null, $depth + 1);
+        $nestedChildren = buildStylish($node['children'] ?? [], $depth + 2);
+
         return match ($type) {
             'nested' => [
-                "{$indent}  {$key}: " . buildStylish($node['children'], $depth + 2)
+                "{$indent}  {$key}: {$nestedChildren}"
             ],
             'added' => [
-                "{$indent}+ {$key}: " . formatValue($node['value'], $depth + 1)
+                "{$indent}+ {$key}: {$formattedValue}"
             ],
             'removed' => [
-                "{$indent}- {$key}: " . formatValue($node['value'], $depth + 1)
+                "{$indent}- {$key}: {$formattedValue}"
             ],
             'unchanged' => [
-                "{$indent}  {$key}: " . formatValue($node['value'], $depth + 1)
+                "{$indent}  {$key}: {$formattedValue}"
             ],
             'updated' => [
-                "{$indent}- {$key}: " . formatValue($node['oldValue'], $depth + 1),
-                "{$indent}+ {$key}: " . formatValue($node['newValue'], $depth + 1)
+                "{$indent}- {$key}: {$formattedOldValue}",
+                "{$indent}+ {$key}: {$formattedNewValue}"
             ],
-            default => []
+            default => throw new InvalidArgumentException("Unknown node type: {$type}")
         };
     }, $nodes);
 
-    $lines = array_merge(...$lines);
+    $lines = implode(
+        "\n",
+        array_merge(...$lines)
+    );
 
-    return "{\n" . implode("\n", $lines) . "\n{$outerIndent}}";
+    return "{\n{$lines}\n{$outerIndent}}";
 }
 
 function formatValue(mixed $value, int $depth): string
@@ -63,16 +71,20 @@ function formatComplexValue(array $value, int $depth): string
 {
     $indent = str_repeat('  ', $depth);
     $outerIndent = str_repeat('  ', $depth - 1);
-    $lines = [];
 
-    $lines = array_map(function ($item, $key) use ($indent, $depth) {
+    $lines = array_map(function (mixed $item, string $key) use ($indent, $depth): string {
+
+        $formattedValue = formatValue($item, $depth + 1);
+
         if (is_array($item)) {
             $nested = formatComplexValue($item, $depth + 2);
             return "{$indent}  {$key}: {$nested}";
         } else {
-            return "{$indent}  {$key}: " . formatValue($item, $depth + 1);
+            return "{$indent}  {$key}: {$formattedValue}";
         }
     }, $value, array_keys($value));
 
-    return "{\n" . implode("\n", $lines) . "\n{$outerIndent}}";
+    $lines = implode("\n", $lines);
+
+    return "{\n{$lines}\n{$outerIndent}}";
 }
